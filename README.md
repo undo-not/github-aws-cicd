@@ -1,8 +1,9 @@
 # EC2-CodeDeploy-codepipeline-GitHub構築
-ちなLAMP構成
+ちなLAMP
 
 ## 大まかな流れ  
 1. EC2インスタンスの作成
+1. DBの作成
 
 ### EC2インスタンスの作成
 AWSコンソールのGUIから操作してインスタンスを作成。Ubuntuが良い。AmazonLinuxの場合、yumではなくAmazon-Linux-Extrasというレポジトリからインストールする必要があるので注意。
@@ -84,7 +85,7 @@ timedatectl
     sudo a2enconf fqdn
     ````
 
-    ページを作成する
+* ページを作成
     ````bash:ターミナル
     # ドキュメントルートに移動
     cd /var/www/html
@@ -104,16 +105,17 @@ timedatectl
     $ php -v
 
     # インストール
-    $ sudo apt install php7.2-cli
+    # bash上でテストしたいならCLI版
+    $ sudo apt install php7.2
 
     # バージョン確認
     $ php -v
     ````
-    ページを作成する
+* ページを作成
     ````bash:ターミナル
-    sudo vi /var/www/html/info.php
+    sudo vi /var/www/html/index.php
     ````
-    ````vim:/var/www/html/index.php
+    ````vi:/var/www/html/index.php
     <html>
         <body>
             Hello World.<br>
@@ -121,3 +123,27 @@ timedatectl
         </body>
     </html>
     ````
+
+#### 所有者の変更   
+    ubuntuのapacheのユーザとグループはwww-data。apacheではない
+    ````bash:ターミナル
+    # グループ一覧
+    cat /etc/group
+    
+    # www-dataグループ追加
+    $ sudo usermod -a -G www-data ubuntu
+    ````
+    ssh再接続して、所属グループを確認
+    ````bash:ターミナル
+    groups
+    ````
+
+    ````bash:ターミナル
+    sudo chown -R ubuntu:www-data /var/www
+    sudo chmod 2775 /var/www
+    ````
+
+### DBの作成
+今回はCICD構築がメインのため割愛
+
+
