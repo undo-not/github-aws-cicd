@@ -69,10 +69,12 @@ timedatectl
     * https://help.ubuntu.com/lts/serverguide/httpd.html
     * http://www.yamamo10.jp/yamamoto/comp/home_server/WEB_server3/apache/index.php
 
-    ````vi
+    ````vi:000-default.conf
     # ServerAdminの変更
     ServerAdmin <<YOUR E-MAIL ADDRESS>>
+    ````
 
+    ````vi:fqdn.conf
     # ServerName
     ServerName <<YOUR SERVER NAME>>:80
     ````
@@ -99,18 +101,23 @@ timedatectl
 * インストール
     ````bash:ターミナル
     # インストール可能なものを確認
-    $ sudo yum list available | grep php
-
-    # バージョンが古いのでAmazon-Linux-Extrasというレポジトリから入手
-    $ amazon-linux-extras
-    $ amazon-linux-extras info php7.2
+    $ php -v
 
     # インストール
-    $ sudo amazon-linux-extras install php7.2
+    $ sudo apt install php7.2-cli
 
     # バージョン確認
     $ php -v
     ````
-
-* 拡張モジュールのインストール
-
+    ページを作成する
+    ````bash:ターミナル
+    sudo vi /var/www/html/info.php
+    ````
+    ````vim:/var/www/html/index.php
+    <html>
+        <body>
+            Hello World.<br>
+            <?php echo 'hoge'; ?>
+        </body>
+    </html>
+    ````
