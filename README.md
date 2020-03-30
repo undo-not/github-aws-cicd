@@ -151,7 +151,7 @@ timedatectl
 ### CodeCommitの設定
 https://docs.aws.amazon.com/ja_jp/codecommit/latest/userguide/welcome.html
 
-開発者はHTTPSとSSHで接続できる。ユーザごとに証明書発行するか、開発者にssh-keygenしてもらって公開鍵をアップロードするか
+開発者はHTTPSとSSHで接続できる。ユーザごとに証明書(ユーザ名とパスワード)発行するか、開発者にssh-keygenしてもらって公開鍵をアップロードするか
 
 #### IAMの設定
 アイデンティティベースのポリシー (IAMポリシー) でソースのコミットが出来るようにする
