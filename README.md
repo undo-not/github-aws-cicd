@@ -127,23 +127,26 @@ timedatectl
     ````
 
 #### 所有者の変更   
-    ubuntuのapacheのユーザとグループはwww-data。apacheではない
-    ````bash:ターミナル
-    # グループ一覧
-    cat /etc/group
-    
-    # www-dataグループ追加
-    $ sudo usermod -a -G www-data ubuntu
-    ````
-    ssh再接続して、所属グループを確認
-    ````bash:ターミナル
-    groups
-    ````
+ubuntuのapacheのユーザとグループはwww-data。apacheではない  
 
-    ````bash:ターミナル
-    sudo chown -R ubuntu:www-data /var/www
-    sudo chmod 2775 /var/www
-    ````
+````bash:ターミナル
+# グループ一覧
+cat /etc/group
+
+# www-dataグループ追加
+$ sudo usermod -a -G www-data ubuntu
+````
+
+ssh再接続して、所属グループを確認
+
+````bash:ターミナル
+groups
+````
+
+````bash:ターミナル
+sudo chown -R ubuntu:www-data /var/www
+sudo chmod 2775 /var/www
+````
 
 ### DBの作成
 今回はCICD構築がメインのため割愛
