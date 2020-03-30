@@ -1,9 +1,11 @@
-# EC2-CodeDeploy-codepipeline-GitHub構築
+# EC2-CICD構築
+CodeCommit-CodeBuild-CodeDeployをCodePipelineで構築
 ちなLAMP
 
 ## 大まかな流れ  
 1. EC2インスタンスの作成
-1. DBの作成
+1. DBの作成(今回は要らない)
+
 
 ### EC2インスタンスの作成
 AWSコンソールのGUIから操作してインスタンスを作成。Ubuntuが良い。AmazonLinuxの場合、yumではなくAmazon-Linux-Extrasというレポジトリからインストールする必要があるので注意。
@@ -145,5 +147,37 @@ timedatectl
 
 ### DBの作成
 今回はCICD構築がメインのため割愛
+
+### CodeCommitの設定
+https://docs.aws.amazon.com/ja_jp/codecommit/latest/userguide/welcome.html
+
+開発者はHTTPSとSSHで接続できる。ユーザごとに証明書発行するか、開発者にssh-keygenしてもらって公開鍵をアップロードするか
+
+#### IAMの設定
+アイデンティティベースのポリシー (IAMポリシー) でソースのコミットが出来るようにする
+
+* IAMグループを作る  
+    個人ならIAMユーザに直接ポリシー付与してもいいと思うが、チーム開発なら作る
+
+    アタッチするポリシーは「AWSCodeCommit~」系列の中から選ぶ
+    * AWSCodeCommitFullAccess
+
+* IAMユーザを作る  
+    1. 「プログラムによるアクセス」を選択
+    1. グループを選択
+    1. シークレットアクセスキーは使わないので削除
+    1. 「AWS CodeCommit の HTTPS Git 認証情報」から証明書をダウンロード
+
+    ダウンロードしたCSVファイルにユーザ名とパスワードが記載されている。これを使用してHTTPS接続を行う
+
+
+#### CodeDeploy
+
+
+#### CodeCommit
+
+
+#### CodeBuild
+
 
 
